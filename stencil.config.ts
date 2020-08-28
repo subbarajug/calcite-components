@@ -4,6 +4,12 @@ import { sass } from "@stencil/sass";
 import autoprefixer from "autoprefixer";
 import tailwind from "tailwindcss";
 import { generatePreactTypes } from "./support/preact";
+import purgecss from "@fullhuman/postcss-purgecss";
+
+const purge = purgecss({
+  content: ["./src/**/*.tsx"],
+  defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || []
+});
 
 export const create: () => Config = () => ({
   namespace: "calcite",
@@ -71,7 +77,7 @@ export const create: () => Config = () => ({
       injectGlobalPaths: ["src/assets/styles/includes.scss"]
     }),
     postcss({
-      plugins: [tailwind(), autoprefixer()]
+      plugins: [tailwind(), autoprefixer(), ...(process.env.NODE_ENV === "production" ? [purge] : [])]
     })
   ],
   testing: {

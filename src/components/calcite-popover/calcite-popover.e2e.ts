@@ -2,7 +2,7 @@ import { newE2EPage } from "@stencil/core/testing";
 
 import { defaults, hidden, renders } from "../../tests/commonTests";
 
-import { CSS } from "./resources";
+import { CSS, T } from "./resources";
 
 describe("calcite-popover", () => {
   it("renders", async () =>
@@ -145,7 +145,7 @@ describe("calcite-popover", () => {
       `<calcite-popover placement="auto" reference-element="ref" open><img slot="image" src="http://placekitten.com/200/300" /></calcite-popover><div id="ref">referenceElement</div>`
     );
 
-    const imageContainer = await page.find(`calcite-popover >>> .${CSS.imageContainer}`);
+    const imageContainer = await page.find(`calcite-popover >>> [data-test-${T.imageContainer}]`);
 
     expect(await imageContainer.isVisible()).toBe(true);
   });

@@ -11,7 +11,7 @@ import {
   h,
   VNode
 } from "@stencil/core";
-import { CSS, ARIA_DESCRIBED_BY, POPOVER_REFERENCE, TEXT } from "./resources";
+import { T, CSS, ARIA_DESCRIBED_BY, POPOVER_REFERENCE, TEXT } from "./resources";
 import {
   CalcitePlacement,
   defaultOffsetDistance,
@@ -326,7 +326,7 @@ export class CalcitePopover {
 
   renderImage(): VNode {
     return this.el.querySelector("[slot=image]") ? (
-      <div class={CSS.imageContainer}>
+      <div class="image-container overflow-hidden m-2" data-test={T.imageContainer}>
         <slot name="image" />
       </div>
     ) : null;
@@ -340,7 +340,7 @@ export class CalcitePopover {
         ref={(closeButtonEl) => (this.closeButtonEl = closeButtonEl)}
         aria-label={intlClose}
         title={intlClose}
-        class={{ [CSS.closeButton]: true }}
+        class={CSS.closeButton}
         onClick={this.hide}
       >
         <calcite-icon icon="x" scale="m"></calcite-icon>
@@ -352,15 +352,15 @@ export class CalcitePopover {
     const { _referenceElement, open, disablePointer } = this;
     const displayed = _referenceElement && open;
     const arrowNode = !disablePointer ? (
-      <div class={CSS.arrow} ref={(arrowEl) => (this.arrowEl = arrowEl)}></div>
+      <div class="arrow" ref={(arrowEl) => (this.arrowEl = arrowEl)}></div>
     ) : null;
 
     return (
       <Host role="dialog" aria-hidden={!displayed ? "true" : "false"} id={this.getId()}>
         {arrowNode}
-        <div class={CSS.container}>
+        <div class="rounded bg-fg-1 relative flex overflow-hidden flex-col text-1">
           {this.renderImage()}
-          <div class={CSS.content}>
+          <div class="flex justify-between items-start leading-6">
             <slot />
             {this.renderCloseButton()}
           </div>

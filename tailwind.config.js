@@ -14,7 +14,7 @@ module.exports = {
     },
     borderRadius: {
       none: '0',
-      1: "var(--calcite-border-radius)",
+      default: "var(--calcite-border-radius)",
       full: '100%',
     },
     boxShadow: {
@@ -50,8 +50,8 @@ module.exports = {
         2: "var(--calcite-ui-red-2)",
         3: "var(--calcite-ui-red-3)",
       },
-      background: "var(--calcite-ui-background)",
-      foreground: {
+      bg: "var(--calcite-ui-background)",
+      fg: {
         1: "var(--calcite-ui-foreground-1)",
         2: "var(--calcite-ui-foreground-2)",
         3: "var(--calcite-ui-foreground-3)",
